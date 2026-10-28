@@ -1,0 +1,65 @@
+/* ==========================================================================
+   CivicWorkflowIllustration — subtle SVG animations
+   ========================================================================== */
+
+.civic-illustration {
+  width: 100%;
+  /* Grow to fill the hero visual column; clamp so it never overflows */
+  max-width: 660px;
+  /* Reserve enough vertical space so the SVG renders at a useful size
+     before the browser resolves the intrinsic ratio */
+  min-height: 320px;
+  height: auto;
+  display: block;
+}
+
+/* ── Pulse rings around the citizen pin ── */
+@keyframes pulse-ring {
+  0%   { r: 12; opacity: 0.45; }
+  100% { r: 30; opacity: 0; }
+}
+
+.civic-pulse-ring {
+  animation: pulse-ring 2.6s ease-out infinite;
+}
+
+.civic-pulse-ring--delayed {
+  animation: pulse-ring 2.6s ease-out 1.3s infinite;
+}
+
+/* ── Travelling dots along workflow paths ── */
+@keyframes travel-dot {
+  0%   { offset-distance: 0%; opacity: 0; }
+  8%   { opacity: 1; }
+  92%  { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+
+.civic-travel-dot {
+  offset-rotate: 0deg;
+  animation: travel-dot 3.2s ease-in-out infinite;
+}
+
+.civic-travel-dot--d1 { animation-delay: 0s; }
+.civic-travel-dot--d2 { animation-delay: 1.1s; }
+.civic-travel-dot--d3 { animation-delay: 2.2s; }
+
+/* ── Hub glow pulse ── */
+@keyframes hub-glow {
+  0%, 100% { opacity: 0.12; }
+  50%      { opacity: 0.30; }
+}
+
+.civic-hub-glow {
+  animation: hub-glow 3.5s ease-in-out infinite;
+}
+
+/* ── Respect reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .civic-pulse-ring,
+  .civic-pulse-ring--delayed,
+  .civic-travel-dot,
+  .civic-hub-glow {
+    animation: none !important;
+  }
+}
